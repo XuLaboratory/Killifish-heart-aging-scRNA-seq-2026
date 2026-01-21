@@ -4,8 +4,8 @@ library(ggplot2)
 library(harmony)
 
 # --- Paths to DGE_filtered outputs ---
-path_w8   <- "/research/labs/biochem/xux/m310533/seq/files/kf_test/kf_comb/W8/DGE_filtered/" ## Hide /research ~ /kf_comb
-path_w16 <- "/research/labs/biochem/xux/m310533/seq/files/kf_test/kf_comb/W16/DGE_filtered/" ## Hide /research ~ /kf_comb
+path_w8   <- "W8/DGE_filtered/" 
+path_w16 <- "W16/DGE_filtered/" 
 
 # --- W8 ---
 counts_w8 <- readMM(file = paste0(path_w8, "w8_count_matrix.mtx"))
