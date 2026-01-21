@@ -11,7 +11,7 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 ## Scripts & Analysis Pipeline
 
-### 1. `1. Data Integration.R`
+### `1. Data Integration.R`
 *(To be completed by colleague)*
 - **Purpose**: [Pending description]
 - **Key Functions**:
@@ -19,7 +19,7 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 - **Outputs**:
   - ...
 
-### 2. `2. Data Annotation.R`
+### `2. Data Annotation.R`
 *(To be completed by colleague)*
 - **Purpose**: [Pending description]
 - **Key Functions**:
@@ -29,9 +29,9 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 ---
 
-### 3. `3. Cell proportion analysis.R`
+### `3. Cell proportion analysis.R`
 
-**Purpose**: Analyzes cell type composition changes during cardiac aging (W8 vs W16).
+**Purpose**: To analyze cell type composition changes during cardiac aging (W8 vs W16).
 
 **Key Functions**:
 - Calculates cell proportions for each cluster in W8 vs W16
@@ -48,9 +48,9 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 ---
 
-### 4. `4. Differential expression analysis.R`
+### `4. Differential expression analysis.R`
 
-**Purpose**: Identifies differentially expressed genes (DEGs) between W8 and W16 for each cell type.
+**Purpose**: To identify differentially expressed genes (DEGs) between W8 and W16 for each cell type.
 
 **Key Functions**:
 - Performs Wilcoxon rank-sum test for each cluster
@@ -71,7 +71,7 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 ---
 
-### 5. `5. Pathway enrichment gsea.R`
+### `5. Pathway enrichment gsea.R`
 
 **Purpose**: Performs Gene Set Enrichment Analysis (GSEA) using human orthologs to identify pathway-level changes.
 
@@ -92,7 +92,7 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 ---
 
-### 6. `6. Cell-cell communication.R`
+### `6. Cell-cell communication.R`
 *(To be completed by colleague)*
 - **Purpose**: [Pending description]
 - **Key Functions**:
@@ -106,58 +106,16 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 **R Version**: ≥ 4.3.0
 
-**CRAN Packages**:
-- Seurat, dplyr, ggplot2, writexl, readxl, ggrepel, patchwork, RColorBrewer, tidyr
-
-**Bioconductor Packages**:
-- clusterProfiler, org.Hs.eg.db, enrichplot
+**Packages**:
+- Seurat, dplyr, ggplot2, writexl, readxl, ggrepel, patchwork, RColorBrewer, tidyr, clusterProfiler, org.Hs.eg.db, enrichplot
 
 **Input Data**:
 - `kf_simplified.rds`: Preprocessed Seurat object containing:
-  - 10 merged cell types (VCM, EC, Epi, EPDC, M, B, T, Gran, SMC, Neu)
-  - RBC cells already removed
+  - 10 cell clusters (M, B, EC, VCM, EC, Epi, T, EPDC, Gran, SMC, Neu)
   - Metadata: `condition` (W8/W16)
 
 ---
 
-## Usage
-
-**Note**: Scripts 3, 4, and 5 are standalone and include their own environment setup.
-
-**Steps**:
-1. Open the desired script and modify `base_dir` to point to your data directory
-2. Run scripts sequentially:
-```r
-# --- Phase 1: Integration & Annotation ---
-# source("1. Data Integration.R")
-# source("2. Data Annotation.R")
-
-# --- Phase 2: Analysis (Edward) ---
-source("3. Cell proportion analysis.R")
-source("4. Differential expression analysis.R")
-source("5. Pathway enrichment gsea.R")
-
-# --- Phase 3: Communication ---
-# source("6. Cell-cell communication.R")
-```
-
----
-
-## Output Structure
-```
-results/
-├── Q1_*.png/xlsx              # Cell proportion results (Script 3)
-├── Q2_*.pdf/png/xlsx          # DEG and volcano plot results (Script 4)
-└── Q3_*.pdf/xlsx              # GSEA pathway results (Script 5)
-```
-
----
-
-## Citation & Contact
-
-**Citations**:
-- Seurat: Hao et al. (2021) *Cell*
-- clusterProfiler: Yu et al. (2012) *OMICS*
 
 **Contributors**:
 - Scripts 3, 4, 5: Edward (Yifeng Xu) - Bioinformatics Volunteer, Maryland
