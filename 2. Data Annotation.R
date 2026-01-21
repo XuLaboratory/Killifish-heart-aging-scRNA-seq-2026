@@ -4,7 +4,7 @@ library(dplyr)
 library(patchwork)
 library(purrr)
 
-kf = readRDS("/research/labs/biochem/xux/m310533/seq/files/kf_test/kf_RIMD.rds") ## Remove /research ~ /kf_test
+kf = readRDS("kf_RIMD.rds") 
 
 # --- Gene markers search ---
 kf$condition = factor(kf$condition, levels = c("W8", "W16"))
