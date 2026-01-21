@@ -4,7 +4,7 @@ library(Seurat)
 library(biomaRt)
 library(Matrix)
 
-kf = readRDS("/research/labs/biochem/xux/m310533/seq/files/kf_test/kf_simplified.rds") ##Remove ~/research to /kf_test/
+kf = readRDS("kf_simplified.rds") 
 
 # --- Mouse_Mart generation and ATK homology gene search ---
 CellChatDB <- CellChatDB.mouse
