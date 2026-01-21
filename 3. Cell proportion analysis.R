@@ -2,11 +2,10 @@
 # Cell Type Proportion Analysis - Killifish Heart Aging Study
 # 
 # Function: Analyzes cell composition changes between W8 (young) and W16 (aging)
-#           timepoints, generates stacked bar plots and individual comparisons
+#           timepoints, generates individual comparison plots
 # 
 # Input: kf_simplified.rds (Seurat object with merged cell types, RBC removed)
 # Output: 
-#   - Q1_Stacked_BarPlot.png: Overall composition comparison
 #   - Q1_Individual_*.png: Per-cluster comparison plots
 #   - Q1_Combined_*.png: Multi-panel layouts
 #   - Q1_Cell_Proportions.xlsx: Statistical data
@@ -104,24 +103,6 @@ names(colors_final) <- all_clusters
 
 condition_colors <- c("W8" = "#4292C6", "W16" = "#EF3B2C")
 
-# --- Visualization 1: Stacked Bar Plot ---
-
-p1_stacked <- ggplot(cell_stats, aes(x = Condition, y = Percentage, fill = Cluster)) +
-  geom_bar(stat = "identity", position = "stack", color = "black", linewidth = 0.3, width = 0.5) + 
-  scale_fill_manual(values = colors_final, name = "Cell Types") +
-  scale_y_continuous(breaks = seq(0, 100, 25), expand = c(0, 0), limits = c(0, 101)) +
-  labs(title = "Cell Type Proportions", y = "[%]", x = "") +
-  theme_classic(base_size = 14) +
-  theme(
-    panel.grid.major.y = element_line(color = "grey90", linewidth = 0.5),
-    legend.position = "right",
-    legend.title = element_text(face = "bold", size = 12),
-    legend.text = element_text(size = 10)
-  )
-
-ggsave(paste0(out_dir, "Q1_Stacked_BarPlot.png"), plot = p1_stacked, width = 8, height = 7)
-message("✓ Stacked bar plot saved")
-
 # --- Visualization 2: Individual Comparison Plots ---
 
 plot_list_individual <- list()
@@ -164,7 +145,7 @@ for (cluster_name in all_clusters) {
 
 message(paste("✓", length(plot_list_individual), "individual plots saved"))
 
-# --- Visualization 3: Combined Layouts (sorted by proportion)# ---
+# --- Visualization 3: Combined Layouts (sorted by proportion) ---
 
 if (length(plot_list_individual) > 0) {
   
@@ -240,7 +221,6 @@ message("✓ Statistical data exported")
 message("\n=== Analysis Complete ===")
 message(paste("Output directory:", out_dir))
 message("Generated files:")
-message("  - Q1_Stacked_BarPlot.png")
 message(paste("  -", length(plot_list_individual), "individual plots"))
 message("  - 2 combined layout plots")
 message("  - Q1_Cell_Proportions.xlsx")
