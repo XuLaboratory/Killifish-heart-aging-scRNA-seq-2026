@@ -106,17 +106,13 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 **R Version**: ≥ 4.3.0
 
-**Packages**:
-- Seurat, dplyr, ggplot2, writexl, readxl, ggrepel, patchwork, RColorBrewer, tidyr, clusterProfiler, org.Hs.eg.db, enrichplot
-
 **Input Data**:
 - `kf_simplified.rds`: Preprocessed Seurat object containing:
   - 10 cell clusters (M, B, EC, VCM, EC, Epi, T, EPDC, Gran, SMC, Neu)
   - Metadata: `condition` (W8/W16)
 
 ---
-
-
 **Contributors**:
-- Scripts 3, 4, 5: Edward (Yifeng Xu) - Bioinformatics Volunteer, Maryland
-- Scripts 1, 2, 6: [Colleague Name/Info]
+- Scripts 1, 2, 6: Baul Yoon
+- Scripts 3, 4, 5: Edward (Yifeng) Xu
+
