@@ -1,3 +1,17 @@
+# ==============================================================================
+# Data Annotation - Killifish Heart Aging Study
+# 
+# Purpose: To annotate cell clusters for downstream analyses
+#          
+# Input: kf_RIMD.rds
+#
+# Output: 
+#   - kf_simplified.rds: Annotated Seurat object
+#   - stacked_vlnplot.pdf: Stacked Violin plot visualizing known markers
+#
+# Author: Baul Yoon
+# ==============================================================================
+
 library(Seurat)
 library(ggplot2)
 library(dplyr)
