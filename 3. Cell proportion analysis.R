@@ -4,7 +4,7 @@
 # Function: Analyzes cell composition changes between W8 (young) and W16 (aging)
 #           timepoints, generates individual comparison plots
 # 
-# Input: kf_simplified.rds (Seurat object with merged cell types, RBC removed)
+# Input: kf_simplified.rds
 # Output: 
 #   - Individual_*.png: Per-cluster comparison plots
 #   - Combined_*.png: Multi-panel layouts
@@ -176,6 +176,7 @@ if (length(plot_list_individual) > 0) {
 
 write_xlsx(cell_stats, paste0(out_dir, "Cell_Proportions.xlsx"))
 message("✓ Statistical data exported")
+
 
 
 
