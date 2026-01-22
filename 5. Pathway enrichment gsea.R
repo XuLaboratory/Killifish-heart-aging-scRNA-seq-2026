@@ -4,12 +4,12 @@
 # Function: Performs Gene Set Enrichment Analysis using human orthologs,
 #           generates ridge plots showing pathway distributions
 # 
-# Input: kf_simplified.rds (Seurat object with merged cell types, RBC removed)
+# Input: kf_simplified.rds
 # Output: 
-#   - Q3_GSEA_Results.xlsx: Complete GSEA results for all groups
-#   - Q3_GSEA_RidgePlots.pdf: Ridge plots showing enrichment distributions
-#   - Q3_GO_Gene_Lists.xlsx: Core enrichment genes (top 10 per pathway)
-#   - Q3_RidgePlot_Gene_Summary.xlsx: Top 5 genes per pathway for ridge plots
+#   - GSEA_Results.xlsx: Complete GSEA results for all groups
+#   - GSEA_RidgePlots.pdf: Ridge plots showing enrichment distributions
+#   - GO_Gene_Lists.xlsx: Core enrichment genes (top 10 per pathway)
+#   - RidgePlot_Gene_Summary.xlsx: Top 5 genes per pathway for ridge plots
 # 
 # Author: Edward (Yifeng Xu)
 # ==============================================================================
@@ -41,20 +41,7 @@ suppressPackageStartupMessages({
 
 plan("sequential")
 
-# ------------------------------------------------------------------------------
-# Path Configuration
-# MODIFY THESE PATHS before running:
-# - Set base_dir to your data directory
-# - Set out_dir to your desired output directory
-# ------------------------------------------------------------------------------
-
-# Option 1: Use current working directory (recommended)
-base_dir <- getwd()
-
-# Option 2: Specify custom path (uncomment and modify)
-# base_dir <- "/path/to/your/data/"
-
-# Output directory
+base_dir <- "/path/to/your/data/"
 out_dir <- file.path(base_dir, "results/")
 
 if (!dir.exists(out_dir)) {
@@ -74,8 +61,8 @@ if(file.exists(rds_path)) {
 }
 
 # Define conditions
-cond_treatment <- "W16"
-cond_control <- "W8"
+w16 <- "W16"
+w8 <- "W8"
 
 # Gene name conversion function
 kf_to_human <- function(genes) {
@@ -137,8 +124,8 @@ for (group_name in names(valid_groups)) {
   tryCatch({
     # Step 1: Differential expression
     markers <- FindMarkers(sub_obj, 
-                           ident.1 = cond_treatment,
-                           ident.2 = cond_control,
+                           ident.1 = w16,
+                           ident.2 = w8,
                            group.by = "condition", 
                            logfc.threshold = 0,
                            min.pct = 0.05,
@@ -222,10 +209,10 @@ for (group_name in names(valid_groups)) {
 # --- Save GSEA Results ---
 
 if (length(gsea_results_list) > 0) {
-  write_xlsx(do.call(rbind, gsea_results_list), paste0(out_dir, "Q3_GSEA_Results.xlsx"))
+  write_xlsx(do.call(rbind, gsea_results_list), paste0(out_dir, "GSEA_Results.xlsx"))
   message("\n✓ GSEA results exported")
   
-  pdf(paste0(out_dir, "Q3_GSEA_RidgePlots.pdf"), width = 10, height = 8)
+  pdf(paste0(out_dir, "GSEA_RidgePlots.pdf"), width = 10, height = 8)
   for (n in names(plot_list_ridge)) print(plot_list_ridge[[n]])
   dev.off()
   message("✓ Ridge plots saved")
@@ -297,7 +284,7 @@ for (group_name in names(gsea_objects_list)) {
 }
 
 if (length(all_go_genes) > 0) {
-  write_xlsx(all_go_genes, paste0(out_dir, "Q3_GO_Gene_Lists.xlsx"))
+  write_xlsx(all_go_genes, paste0(out_dir, "GO_Gene_Lists.xlsx"))
   message("✓ Core enrichment genes exported")
 }
 
@@ -342,17 +329,6 @@ for (group_name in names(gsea_objects_list)) {
 
 if (length(ridge_gene_summary) > 0) {
   write_xlsx(ridge_gene_summary, 
-             paste0(out_dir, "Q3_RidgePlot_Gene_Summary.xlsx"))
+             paste0(out_dir, "RidgePlot_Gene_Summary.xlsx"))
   message("✓ Ridge plot gene summaries exported")
 }
-
-# ---# Summary ---
-
-message("\n=== Analysis Complete ===")
-message(paste("Output directory:", out_dir))
-message("Generated files:")
-message("  - Q3_GSEA_Results.xlsx")
-message("  - Q3_GSEA_RidgePlots.pdf")
-message("  - Q3_GO_Gene_Lists.xlsx")
-message("  - Q3_RidgePlot_Gene_Summary.xlsx")
-message(paste("\nAnalyzed", length(gsea_results_list), "cell type groups"))
