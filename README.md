@@ -12,21 +12,32 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 ## Scripts & Analysis Pipeline
 
 ### `1. Data Integration.R`
-*(To be completed by colleague)*
-- **Purpose**: [Pending description]
-- **Key Functions**:
-  - ...
-- **Outputs**:
-  - ...
+
+**Purpose**: To integrate week 8 and week 16 heart datasets
+
+**Key Functions**: 
+- Import week 8 and week 16 gene expression profiles, cell metadata, and matrix files
+- Create Seurat objects for both week 8 and week 16 with quality control
+- Normalize, merge, scale, integrate using Harmony, and cluster the week 8 and week 16 Seurat objects
+  
+- **Output**:
+  - `kf_RIMD.rds`: Integrated Seurat object
+
+---
 
 ### `2. Data Annotation.R`
-*(To be completed by colleague)*
-- **Purpose**: [Pending description]
-- **Key Functions**:
-  - ...
-- **Outputs**:
-  - ...
 
+- **Purpose**: To annotate cell clusters for downstream analyses
+  
+- **Key Functions**:
+  - Search the top 50 markers of each cluster
+  - Annotate clusters based on known markers curated from the literature
+  - Remove clusters containing heterogeneous and ambiguous gene expression profiles
+    
+- **Outputs**:
+  - `kf_simplified.rds`: Annotated Seurat object
+  - `stacked_vlnplot.pdf`: Stacked Violin plot visualizing known markers
+    
 ---
 
 ### `3. Cell proportion analysis.R`
@@ -39,7 +50,7 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 - Produce multi-panel layouts sorted by total proportion
 
 **Outputs**:
-- `Individual_*.png`: Per-cluster bar plots (N = number of clusters)
+- `Individual_*.png`: Per-cluster comparison plots
 - `Combined_5col.png`: 5-column layout
 - `Cell_Proportions.xlsx`: Statistical data table
 
@@ -47,21 +58,18 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 ### `4. Differential expression analysis.R`
 
-**Purpose**: To identify differentially expressed genes (DEGs) between W8 and W16 for each cell type.
+**Purpose**: To identify differentially expressed genes between W8 and W16 for each cell type.
 
 **Key Functions**:
-- Perform Wilcoxon rank-sum test for each cluster
+- Perform Wilcoxon rank-sum test for M, B, EC, VCM, Epi, and T cell cluster
 - Generate volcano plots with labeled top genes
-- Analyze merged cell type groups (M, B, EC, VCM, Epi, T) for increased statistical power
 - Create publication-ready multi-panel volcano plots
 
 **Outputs**:
-- `DEGs_Top50.xlsx`: Top 50 DEGs per cluster (ranked by |log2FC|)
-- `Volcano_*.pdf/png`: Individual volcano plots for each cluster
-- `Merged_DEGs.xlsx`: DEGs for merged groups
-- `Volcano_Merged_*.pdf/png`: Volcano plots for merged groups
-- `Volcano_Grid.pdf/png`: 2×3 layout for publication
-- `All_DEGs.xlsx`: Complete DEG results for all clusters
+- DEGs_Top50.xlsx: Top 50 DEGs per cluster
+- Volcano_*.pdf/png: Individual volcano plots
+- Merged_DEGs.xlsx: DEGs for merged groups
+- Volcano_Horizontal/Grid.pdf/png: Multi-panel plots
 
 ---
 
@@ -85,12 +93,19 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 ---
 
 ### `6. Cell-cell communication.R`
-*(To be completed by colleague)*
-- **Purpose**: [Pending description]
+
+- **Purpose**: To investigate intercellular communications between cell clusters
+  
 - **Key Functions**:
-  - ...
+  - Import gene expression matrices and cell-type annotation information 
+  - Convert killifish gene names to mouse orthologs
+  - Create CellChat objects for both week 8 and week 16 and compute cell-cell communication probabilities between cell types
+  - Generate a circle plot visualizing intercellular communications and a stacked bar chart showing the relative information flow of signaling pathways  
+  - Generate a heatmap visualizing cell type-specific outgoing and incoming signaling patterns
+    
 - **Outputs**:
-  - ...
+  - cellchat_w8: Week 8 CellChat object
+  - cellchat_w16: Week 16 CellChat object
 
 ---
 
@@ -104,6 +119,7 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
   - Metadata: `condition` (W8/W16)
 
 ---
+
 **Contributors**:
 - Scripts 1, 2, 6: Baul Yoon
 - Scripts 3, 4, 5: Edward (Yifeng) Xu
