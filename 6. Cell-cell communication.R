@@ -1,3 +1,17 @@
+# ==============================================================================
+# Cell-cell communication - Killifish Heart Aging Study
+# 
+# Purpose: To investigate intercellular communications between cell clusters
+#          
+# Input: kf_simplified.rds: Annotated Seurat object
+#
+# Output: 
+#   - cellchat_w8: Week 8 CellChat object
+#   - cellchat_w16: Week 16 CellChat object
+#   
+# Author: Baul Yoon
+# ==============================================================================
+
 library(CellChat)
 library(patchwork)
 library(Seurat)
