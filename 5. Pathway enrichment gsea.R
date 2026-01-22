@@ -1,17 +1,17 @@
 # ==============================================================================
 # Pathway Enrichment Analysis (GSEA) - Killifish Heart Aging Study
 # 
-# Function: Performs Gene Set Enrichment Analysis using human orthologs,
-#           generates ridge plots showing pathway distributions
+# Purpose: To perform Gene Set Enrichment Analysis using human orthologs
+#          to identify pathway-level changes
 # 
 # Input: kf_simplified.rds
 # Output: 
-#   - GSEA_Results.xlsx: Complete GSEA results for all groups
-#   - GSEA_RidgePlots.pdf: Ridge plots showing enrichment distributions
-#   - GO_Gene_Lists.xlsx: Core enrichment genes (top 10 per pathway)
-#   - RidgePlot_Gene_Summary.xlsx: Top 5 genes per pathway for ridge plots
+#   - GSEA_Results.xlsx: Complete GSEA results (GO terms, NES, p-values)
+#   - GSEA_RidgePlots.pdf: Ridge plots for all groups
+#   - GO_Gene_Lists.xlsx: Top 10 core enrichment genes per pathway
+#   - RidgePlot_Gene_Summary.xlsx: Top 5 genes per pathway (for ridge plot interpretation)
 # 
-# Author: Edward (Yifeng Xu)
+# Author: Edward (Yifeng) Xu
 # ==============================================================================
 
 message("\n=== GSEA Pathway Enrichment Analysis ===\n")
@@ -332,3 +332,4 @@ if (length(ridge_gene_summary) > 0) {
              paste0(out_dir, "RidgePlot_Gene_Summary.xlsx"))
   message("✓ Ridge plot gene summaries exported")
 }
+
