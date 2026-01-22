@@ -113,8 +113,7 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 - **R Version**: ≥ 4.3.0
 
-- **Input Data**:
-- `kf_simplified.rds`: Preprocessed Seurat object containing:
+- **Input Data**: `kf_simplified.rds`: Annotated Seurat object containing:
   - 10 cell clusters (M, B, EC, VCM, EC, Epi, T, EPDC, Gran, SMC, Neu)
   - Metadata: `condition` (W8/W16)
 
