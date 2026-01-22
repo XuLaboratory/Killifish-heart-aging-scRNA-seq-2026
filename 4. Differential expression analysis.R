@@ -4,12 +4,12 @@
 # Function: Identifies differentially expressed genes between W8 and W16
 #           for each cell type, generates volcano plots
 # 
-# Input: kf_simplified.rds (Seurat object with merged cell types, RBC removed)
+# Input: kf_simplified.rds 
 # Output: 
-#   - Q2_DEGs_Top50.xlsx: Top 50 DEGs per cluster
-#   - Q2_Volcano_*.pdf/png: Individual volcano plots
-#   - Q2_Merged_DEGs.xlsx: DEGs for merged groups
-#   - Q2_Volcano_Horizontal/Grid.pdf/png: Publication-ready multi-panel plots
+#   - DEGs_Top50.xlsx: Top 50 DEGs per cluster
+#   - Volcano_*.pdf/png: Individual volcano plots
+#   - Merged_DEGs.xlsx: DEGs for merged groups
+#   - Volcano_Horizontal/Grid.pdf/png: Multi-panel plots
 # 
 # Author: Edward (Yifeng Xu)
 # ==============================================================================
@@ -69,8 +69,8 @@ if(file.exists(rds_path)) {
 }
 
 # Define conditions
-cond_treatment <- "W16"
-cond_control <- "W8"
+w16 <- "W16"
+w8 <- "W8"
 
 # Gene name conversion function
 kf_to_human <- function(genes) {
@@ -97,8 +97,8 @@ for (cluster in target_clusters) {
   
   try({
     markers <- FindMarkers(sub_obj, 
-                           ident.1 = cond_treatment,
-                           ident.2 = cond_control,
+                           ident.1 = w16,
+                           ident.2 = w8,
                            group.by = "condition", 
                            min.pct = 0.1, 
                            logfc.threshold = 0,
@@ -120,7 +120,7 @@ if(length(all_degs_list) > 0) {
     x %>% dplyr::top_n(50, abs(avg_log2FC)) %>% 
       dplyr::select(gene, gene_human, avg_log2FC, pct.1, pct.2, p_val, p_val_adj)
   })
-  write_xlsx(deg_export, paste0(out_dir, "Q2_DEGs_Top50.xlsx"))
+  write_xlsx(deg_export, paste0(out_dir, "DEGs_Top50.xlsx"))
   message("✓ Top 50 DEGs exported")
 }
 
@@ -202,9 +202,9 @@ message("\n--- Generating individual volcano plots ---")
 
 for (ct in names(all_degs_list)) {
   p <- plot_volcano(all_degs_list[[ct]], title = paste0(ct, " (W16 vs W8)"))
-  ggsave(paste0(out_dir, "Q2_Volcano_", gsub("-", "_", ct), ".pdf"), 
+  ggsave(paste0(out_dir, "Volcano_", gsub("-", "_", ct), ".pdf"), 
          p, width = 8, height = 6)
-  ggsave(paste0(out_dir, "Q2_Volcano_", gsub("-", "_", ct), ".png"), 
+  ggsave(paste0(out_dir, "Volcano_", gsub("-", "_", ct), ".png"), 
          p, width = 8, height = 6, dpi = 300)
 }
 
@@ -245,8 +245,8 @@ for (group_name in names(merged_groups)) {
   
   tryCatch({
     markers <- FindMarkers(sub_obj, 
-                           ident.1 = cond_treatment,
-                           ident.2 = cond_control,
+                           ident.1 = w16,
+                           ident.2 = w8,
                            group.by = "condition", 
                            min.pct = 0.1, 
                            logfc.threshold = 0,
@@ -269,7 +269,7 @@ if (length(merged_deg_results) > 0) {
     x %>% dplyr::select(gene, avg_log2FC, pct.1, pct.2, p_val, p_val_adj) %>%
       dplyr::arrange(p_val_adj)
   })
-  write_xlsx(merged_export, paste0(out_dir, "Q2_Merged_DEGs.xlsx"))
+  write_xlsx(merged_export, paste0(out_dir, "Merged_DEGs.xlsx"))
   message("✓ Merged group DEGs exported")
 }
 
@@ -277,9 +277,9 @@ if (length(merged_deg_results) > 0) {
 for (group_name in names(merged_deg_results)) {
   p <- plot_volcano(merged_deg_results[[group_name]], 
                     title = paste0(group_name, " (W16 vs W8)"))
-  ggsave(paste0(out_dir, "Q2_Volcano_Merged_", group_name, ".pdf"), 
+  ggsave(paste0(out_dir, "Volcano_Merged_", group_name, ".pdf"), 
          p, width = 8, height = 6)
-  ggsave(paste0(out_dir, "Q2_Volcano_Merged_", group_name, ".png"), 
+  ggsave(paste0(out_dir, "Volcano_Merged_", group_name, ".png"), 
          p, width = 8, height = 6, dpi = 300)
 }
 
@@ -422,9 +422,9 @@ if (length(paper_volcano_plots) > 0) {
   combined_paper <- wrap_plots(paper_volcano_plots, nrow = 1) +
     plot_annotation(theme = theme(plot.margin = margin(5, 5, 5, 5)))
   
-  ggsave(paste0(out_dir, "Q2_Volcano_Horizontal.pdf"), 
+  ggsave(paste0(out_dir, "Volcano_Horizontal.pdf"), 
          combined_paper, width = 18, height = 3.5)
-  ggsave(paste0(out_dir, "Q2_Volcano_Horizontal.png"), 
+  ggsave(paste0(out_dir, "Volcano_Horizontal.png"), 
          combined_paper, width = 18, height = 3.5, dpi = 400)
   
   # Grid layout
@@ -444,9 +444,9 @@ if (length(paper_volcano_plots) > 0) {
   combined_paper_grid <- wrap_plots(plot_list_grid, nrow = nrow_grid, ncol = ncol_grid) +
     plot_annotation(theme = theme(plot.margin = margin(5, 5, 5, 5)))
   
-  ggsave(paste0(out_dir, "Q2_Volcano_Grid.pdf"), 
+  ggsave(paste0(out_dir, "Volcano_Grid.pdf"), 
          combined_paper_grid, width = 12, height = 7)
-  ggsave(paste0(out_dir, "Q2_Volcano_Grid.png"), 
+  ggsave(paste0(out_dir, "Volcano_Grid.png"), 
          combined_paper_grid, width = 12, height = 7, dpi = 400)
   
   message("✓ Publication-ready plots saved")
@@ -458,14 +458,5 @@ if (length(all_degs_list) > 0) {
     x %>% dplyr::select(gene, avg_log2FC, pct.1, pct.2, p_val, p_val_adj) %>%
       dplyr::arrange(p_val_adj)
   })
-  write_xlsx(all_export, paste0(out_dir, "Q2_All_DEGs.xlsx"))
+  write_xlsx(all_export, paste0(out_dir, "All_DEGs.xlsx"))
 }
-
-# --- Summary ---
-message("\n=== Analysis Complete ===")
-message(paste("Output directory:", out_dir))
-message("Generated files:")
-message(paste("  -", length(all_degs_list), "individual volcano plots"))
-message(paste("  -", length(merged_deg_results), "merged group volcano plots"))
-message("  - 2 publication-ready multi-panel plots")
-message("  - 3 Excel files with DEG results")
