@@ -34,17 +34,14 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 **Purpose**: To analyze cell type composition changes during cardiac aging (W8 vs W16).
 
 **Key Functions**:
-- Calculates cell proportions for each cluster in W8 vs W16
-- Creates individual comparison plots for each cell type (with 5% Y-axis intervals)
-- Produces multi-panel layouts sorted by total proportion
+- Calculate cell proportions for each cluster in W8 vs W16
+- Create individual comparison plots for each cell type (with 5% Y-axis intervals)
+- Produce multi-panel layouts sorted by total proportion
 
 **Outputs**:
-- `Q1_Individual_*.png`: Per-cluster bar plots (N = number of clusters)
-- `Q1_Combined_5col.png`: 5-column layout
-- `Q1_Combined_4col.png`: 4-column layout
-- `Q1_Cell_Proportions.xlsx`: Statistical data table
-
-**Runtime**: ~2-5 minutes
+- `Individual_*.png`: Per-cluster bar plots (N = number of clusters)
+- `Combined_5col.png`: 5-column layout
+- `Cell_Proportions.xlsx`: Statistical data table
 
 ---
 
@@ -53,42 +50,37 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 **Purpose**: To identify differentially expressed genes (DEGs) between W8 and W16 for each cell type.
 
 **Key Functions**:
-- Performs Wilcoxon rank-sum test for each cluster
-- Generates volcano plots with labeled top genes
-- Analyzes merged cell type groups (M, B, EC, VCM, Epi, T) for increased statistical power
-- Creates publication-ready multi-panel volcano plots
+- Perform Wilcoxon rank-sum test for each cluster
+- Generate volcano plots with labeled top genes
+- Analyze merged cell type groups (M, B, EC, VCM, Epi, T) for increased statistical power
+- Create publication-ready multi-panel volcano plots
 
 **Outputs**:
-- `Q2_DEGs_Top50.xlsx`: Top 50 DEGs per cluster (ranked by |log2FC|)
-- `Q2_Volcano_*.pdf/png`: Individual volcano plots for each cluster
-- `Q2_Merged_DEGs.xlsx`: DEGs for merged groups
-- `Q2_Volcano_Merged_*.pdf/png`: Volcano plots for merged groups
-- `Q2_Volcano_Horizontal.pdf/png`: 1×6 layout for publication
-- `Q2_Volcano_Grid.pdf/png`: 2×3 layout for publication
-- `Q2_All_DEGs.xlsx`: Complete DEG results for all clusters
-
-**Runtime**: ~10-30 minutes (depending on cell counts)
+- `DEGs_Top50.xlsx`: Top 50 DEGs per cluster (ranked by |log2FC|)
+- `Volcano_*.pdf/png`: Individual volcano plots for each cluster
+- `Merged_DEGs.xlsx`: DEGs for merged groups
+- `Volcano_Merged_*.pdf/png`: Volcano plots for merged groups
+- `Volcano_Grid.pdf/png`: 2×3 layout for publication
+- `All_DEGs.xlsx`: Complete DEG results for all clusters
 
 ---
 
 ### `5. Pathway enrichment gsea.R`
 
-**Purpose**: Performs Gene Set Enrichment Analysis (GSEA) using human orthologs to identify pathway-level changes.
+**Purpose**: To perform Gene Set Enrichment Analysis (GSEA) using human orthologs to identify pathway-level changes.
 
 **Key Functions**:
-- Converts killifish gene names to human orthologs
-- Maps gene symbols to Entrez IDs for pathway analysis
-- Runs gseGO (Gene Ontology Biological Process) for major cell type groups
-- Generates ridge plots showing enrichment score distributions
-- Extracts core enrichment genes driving pathway significance
+- Convert killifish gene names to human orthologs
+- Map gene symbols to Entrez IDs for pathway analysis
+- Run gseGO (Gene Ontology Biological Process) for major cell type groups
+- Generate ridge plots showing enrichment score distributions
+- Extract core enrichment genes driving pathway significance
 
 **Outputs**:
-- `Q3_GSEA_Results.xlsx`: Complete GSEA results (GO terms, NES, p-values)
-- `Q3_GSEA_RidgePlots.pdf`: Ridge plots for all groups
-- `Q3_GO_Gene_Lists.xlsx`: Top 10 core enrichment genes per pathway
-- `Q3_RidgePlot_Gene_Summary.xlsx`: Top 5 genes per pathway (for ridge plot interpretation)
-
-**Runtime**: ~5-15 minutes
+- `GSEA_Results.xlsx`: Complete GSEA results (GO terms, NES, p-values)
+- `GSEA_RidgePlots.pdf`: Ridge plots for all groups
+- `GO_Gene_Lists.xlsx`: Top 10 core enrichment genes per pathway
+- `RidgePlot_Gene_Summary.xlsx`: Top 5 genes per pathway (for ridge plot interpretation)
 
 ---
 
