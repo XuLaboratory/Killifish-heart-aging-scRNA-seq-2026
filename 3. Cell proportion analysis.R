@@ -5,6 +5,7 @@
 #          (W8 vs W16)
 # 
 # Input: kf_simplified.rds
+#
 # Output: 
 #   - Individual_*.png: Per-cluster comparison plots
 #   - Combined_5col.png: 5-column layout
@@ -176,6 +177,7 @@ if (length(plot_list_individual) > 0) {
 
 write_xlsx(cell_stats, paste0(out_dir, "Cell_Proportions.xlsx"))
 message("✓ Statistical data exported")
+
 
 
 
