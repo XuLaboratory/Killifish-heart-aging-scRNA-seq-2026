@@ -177,9 +177,3 @@ if (length(plot_list_individual) > 0) {
 
 write_xlsx(cell_stats, paste0(out_dir, "Cell_Proportions.xlsx"))
 message("✓ Statistical data exported")
-
-
-
-
-
-
