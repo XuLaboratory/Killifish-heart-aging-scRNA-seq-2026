@@ -120,7 +120,8 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 ---
 
-- **Contributors**:
+## Contributors
+
 - Scripts 1, 2, 6: Baul Yoon
 - Scripts 3, 4, 5: Edward (Yifeng) Xu
 
