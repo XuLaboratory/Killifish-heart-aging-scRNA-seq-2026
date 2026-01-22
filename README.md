@@ -61,15 +61,15 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 - **Purpose**: To identify differentially expressed genes between W8 and W16 for each cell type.
 
 - **Key Functions**:
-- Perform Wilcoxon rank-sum test for M, B, EC, VCM, Epi, and T cell cluster
-- Generate volcano plots with labeled top genes
-- Create publication-ready multi-panel volcano plots
+  - Perform Wilcoxon rank-sum test for M, B, EC, VCM, Epi, and T cell cluster
+  - Generate volcano plots with labeled top genes
+  - Create publication-ready multi-panel volcano plots
 
 - **Outputs**:
-- DEGs_Top50.xlsx: Top 50 DEGs per cluster
-- Volcano_*.pdf/png: Individual volcano plots
-- Merged_DEGs.xlsx: DEGs for merged groups
-- Volcano_Horizontal/Grid.pdf/png: Multi-panel plots
+  - DEGs_Top50.xlsx: Top 50 DEGs per cluster
+  - Volcano_*.pdf/png: Individual volcano plots
+  - Merged_DEGs.xlsx: DEGs for merged groups
+  - Volcano_Horizontal/Grid.pdf/png: Multi-panel plots
 
 ---
 
@@ -78,17 +78,17 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 - **Purpose**: To perform Gene Set Enrichment Analysis (GSEA) using human orthologs to identify pathway-level changes.
 
 - **Key Functions**:
-- Convert killifish gene names to human orthologs
-- Map gene symbols to Entrez IDs for pathway analysis
-- Run gseGO (Gene Ontology Biological Process) for major cell type groups
-- Generate ridge plots showing enrichment score distributions
-- Extract core enrichment genes driving pathway significance
+  - Convert killifish gene names to human orthologs
+  - Map gene symbols to Entrez IDs for pathway analysis
+  - Run gseGO (Gene Ontology Biological Process) for major cell type groups
+  - Generate ridge plots showing enrichment score distributions
+  - Extract core enrichment genes driving pathway significance
 
 - **Outputs**:
-- `GSEA_Results.xlsx`: Complete GSEA results (GO terms, NES, p-values)
-- `GSEA_RidgePlots.pdf`: Ridge plots for all groups
-- `GO_Gene_Lists.xlsx`: Top 10 core enrichment genes per pathway
-- `RidgePlot_Gene_Summary.xlsx`: Top 5 genes per pathway (for ridge plot interpretation)
+  - `GSEA_Results.xlsx`: Complete GSEA results (GO terms, NES, p-values)
+  - `GSEA_RidgePlots.pdf`: Ridge plots for all groups
+  - `GO_Gene_Lists.xlsx`: Top 10 core enrichment genes per pathway
+  - `RidgePlot_Gene_Summary.xlsx`: Top 5 genes per pathway (for ridge plot interpretation)
 
 ---
 
