@@ -1,8 +1,8 @@
 # ==============================================================================
 # Differential Expression Analysis - Killifish Heart Aging Study
 # 
-# Function: Identifies differentially expressed genes between W8 and W16
-#           for each cell type, generates volcano plots
+# Purpose: To identify differentially expressed genes between W8 and W16
+#          for each cell type
 # 
 # Input: kf_simplified.rds 
 # Output: 
@@ -11,7 +11,7 @@
 #   - Merged_DEGs.xlsx: DEGs for merged groups
 #   - Volcano_Horizontal/Grid.pdf/png: Multi-panel plots
 # 
-# Author: Edward (Yifeng Xu)
+# Author: Edward (Yifeng) Xu
 # ==============================================================================
 
 message("\n=== Differential Expression Analysis ===\n")
@@ -460,3 +460,4 @@ if (length(all_degs_list) > 0) {
   })
   write_xlsx(all_export, paste0(out_dir, "All_DEGs.xlsx"))
 }
+
