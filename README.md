@@ -16,9 +16,9 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 - **Purpose**: To integrate week 8 and week 16 heart datasets
 
 - **Key Functions**: 
-- Import week 8 and week 16 gene expression profiles, cell metadata, and matrix files
-- Create Seurat objects for both week 8 and week 16 with quality control
-- Normalize, merge, scale, integrate using Harmony, and cluster the week 8 and week 16 Seurat objects
+  - Import week 8 and week 16 gene expression profiles, cell metadata, and matrix files
+  - Create Seurat objects for both week 8 and week 16 with quality control
+  - Normalize, merge, scale, integrate using Harmony, and cluster the week 8 and week 16 Seurat objects
   
 - **Output**:
   - `kf_RIMD.rds`: Integrated Seurat object
@@ -45,14 +45,14 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 - **Purpose**: To analyze cell type composition changes during cardiac aging (W8 vs W16).
 
 - **Key Functions**:
-- Calculate cell proportions for each cluster in W8 vs W16
-- Create individual comparison plots for each cell type (with 5% Y-axis intervals)
-- Produce multi-panel layouts sorted by total proportion
+  - Calculate cell proportions for each cluster in W8 vs W16
+  - Create individual comparison plots for each cell type (with 5% Y-axis intervals)
+  - Produce multi-panel layouts sorted by total proportion
 
 - **Outputs**:
-- `Individual_*.png`: Per-cluster comparison plots
-- `Combined_5col.png`: 5-column layout
-- `Cell_Proportions.xlsx`: Statistical data table
+  - `Individual_*.png`: Per-cluster comparison plots
+  - `Combined_5col.png`: 5-column layout
+  - `Cell_Proportions.xlsx`: Statistical data table
 
 ---
 
