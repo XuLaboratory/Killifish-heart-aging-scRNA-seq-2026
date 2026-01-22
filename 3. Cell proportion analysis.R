@@ -6,9 +6,9 @@
 # 
 # Input: kf_simplified.rds (Seurat object with merged cell types, RBC removed)
 # Output: 
-#   - Q1_Individual_*.png: Per-cluster comparison plots
-#   - Q1_Combined_*.png: Multi-panel layouts
-#   - Q1_Cell_Proportions.xlsx: Statistical data
+#   - Individual_*.png: Per-cluster comparison plots
+#   - Combined_*.png: Multi-panel layouts
+#   - Cell_Proportions.xlsx: Statistical data
 # 
 # Author: Edward (Yifeng Xu)
 # ==============================================================================
@@ -34,22 +34,8 @@ suppressPackageStartupMessages({
   library(patchwork)
 })
 
-# ------------------------------------------------------------------------------
-# Path Configuration
-# MODIFY THESE PATHS before running:
-# - Set base_dir to your data directory
-# - Set out_dir to your desired output directory
-# ------------------------------------------------------------------------------
-
-# Option 1: Use current working directory (recommended)
-base_dir <- getwd()
-
-# Option 2: Specify custom path (uncomment and modify)
-# base_dir <- "/path/to/your/data/"
-
-# Output directory
+base_dir <- "/path/to/your/data/"
 out_dir <- file.path(base_dir, "results/")
-
 if (!dir.exists(out_dir)) {
   dir.create(out_dir, recursive = TRUE)
 }
@@ -137,7 +123,7 @@ for (cluster_name in all_clusters) {
       plot.margin = margin(10, 10, 10, 10)
     )
   
-  ggsave(paste0(out_dir, "Q1_Individual_", cluster_name, ".png"), 
+  ggsave(paste0(out_dir, "Individual_", cluster_name, ".png"), 
          plot = p_single, width = 4.5, height = 4.5, dpi = 300)
   
   plot_list_individual[[cluster_name]] <- p_single
@@ -157,7 +143,7 @@ if (length(plot_list_individual) > 0) {
   cluster_order_sorted <- as.character(cluster_total_prop$Cluster)
   plot_list_sorted <- plot_list_individual[cluster_order_sorted]
   
-  # Layout 1: 5 columns
+  # Layout: 5 columns
   n_plots <- length(plot_list_sorted)
   ncol_layout1 <- 5
   nrow_layout1 <- ceiling(n_plots / ncol_layout1)
@@ -180,47 +166,16 @@ if (length(plot_list_individual) > 0) {
       )
     )
   
-  ggsave(paste0(out_dir, "Q1_Combined_5col.png"), 
+  ggsave(paste0(out_dir, "Combined_5col.png"), 
          combined_layout1, width = 4 * ncol_layout1, height = 4 * nrow_layout1, dpi = 300)
-  
-  # Layout 2: 4 columns
-  ncol_layout2 <- 4
-  nrow_layout2 <- ceiling(n_plots / ncol_layout2)
-  
-  plot_list_4x <- plot_list_sorted
-  for (i in seq_along(plot_list_4x)) {
-    col_num <- ((i - 1) %% ncol_layout2) + 1
-    if (col_num != 1) {
-      plot_list_4x[[i]] <- plot_list_4x[[i]] + 
-        theme(axis.title.y = element_blank())
-    }
-  }
-  
-  combined_layout2 <- wrap_plots(plot_list_4x, nrow = nrow_layout2, ncol = ncol_layout2) +
-    plot_annotation(
-      title = "Cell Type Proportions: W8 vs W16",
-      theme = theme(
-        plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
-        plot.margin = margin(10, 10, 10, 10)
-      )
-    )
-  
-  ggsave(paste0(out_dir, "Q1_Combined_4col.png"), 
-         combined_layout2, width = 16, height = 4 * nrow_layout2, dpi = 300)
   
   message("✓ Combined layouts saved")
 }
 
 # --- Export Statistical Data ---
 
-write_xlsx(cell_stats, paste0(out_dir, "Q1_Cell_Proportions.xlsx"))
+write_xlsx(cell_stats, paste0(out_dir, "Cell_Proportions.xlsx"))
 message("✓ Statistical data exported")
 
-# --- Summary ---
 
-message("\n=== Analysis Complete ===")
-message(paste("Output directory:", out_dir))
-message("Generated files:")
-message(paste("  -", length(plot_list_individual), "individual plots"))
-message("  - 2 combined layout plots")
-message("  - Q1_Cell_Proportions.xlsx")
+
