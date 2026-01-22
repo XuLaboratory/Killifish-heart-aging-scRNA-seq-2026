@@ -1,3 +1,16 @@
+# ==============================================================================
+# Data Integration - Killifish Heart Aging Study
+# 
+# Purpose: To integrate week 8 and week 16 heart datasets
+#          
+# Input: Week 8, week 16 gene expression profiles, cell metadata, and matrix files
+#
+# Output: 
+#   - kf_RIMD.rds: Integrated Seurat object
+#   
+# Author: Baul Yoon
+# ==============================================================================
+
 library(Seurat)
 library(Matrix)
 library(ggplot2)
