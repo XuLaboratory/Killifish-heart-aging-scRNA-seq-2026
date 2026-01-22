@@ -460,4 +460,3 @@ if (length(all_degs_list) > 0) {
   })
   write_xlsx(all_export, paste0(out_dir, "All_DEGs.xlsx"))
 }
-
