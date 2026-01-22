@@ -1,16 +1,16 @@
 # ==============================================================================
 # Cell Type Proportion Analysis - Killifish Heart Aging Study
 # 
-# Function: Analyzes cell composition changes between W8 (young) and W16 (aging)
-#           timepoints, generates individual comparison plots
+# Purpose: To analyze cell type composition changes during cardiac aging 
+#          (W8 vs W16)
 # 
 # Input: kf_simplified.rds
 # Output: 
 #   - Individual_*.png: Per-cluster comparison plots
-#   - Combined_*.png: Multi-panel layouts
-#   - Cell_Proportions.xlsx: Statistical data
+#   - Combined_5col.png: 5-column layout
+#   - Cell_Proportions.xlsx: Statistical data table
 # 
-# Author: Edward (Yifeng Xu)
+# Author: Edward (Yifeng) Xu
 # ==============================================================================
 
 message("\n=== Cell Proportion Analysis ===\n")
@@ -176,6 +176,7 @@ if (length(plot_list_individual) > 0) {
 
 write_xlsx(cell_stats, paste0(out_dir, "Cell_Proportions.xlsx"))
 message("✓ Statistical data exported")
+
 
 
 
