@@ -3,7 +3,7 @@
 # 
 # Purpose: To investigate intercellular communications between cell clusters
 #          
-# Input: kf_simplified.rds: Annotated Seurat object
+# Input: kf_simplified.rds
 #
 # Output: 
 #   - cellchat_w8: Week 8 CellChat object
