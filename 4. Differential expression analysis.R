@@ -5,6 +5,7 @@
 #          for each cell type
 # 
 # Input: kf_simplified.rds 
+#
 # Output: 
 #   - DEGs_Top50.xlsx: Top 50 DEGs per cluster
 #   - Volcano_*.pdf/png: Individual volcano plots
@@ -460,3 +461,4 @@ if (length(all_degs_list) > 0) {
   })
   write_xlsx(all_export, paste0(out_dir, "All_DEGs.xlsx"))
 }
+
