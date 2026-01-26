@@ -37,6 +37,7 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 - **Outputs**:
   - `kf_simplified.rds`: Annotated Seurat object
   - `stacked_vlnplot.pdf`: Stacked Violin plot visualizing known markers
+  - `avg_exp_heatmap.png` : Heatmap plot visualizing known markers
     
 ---
 
