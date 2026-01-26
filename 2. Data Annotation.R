@@ -135,10 +135,3 @@ pheatmap(
 )
 
 dev.off()
-
-                          
-                          
-                          
-
-
-                          
