@@ -17,6 +17,7 @@ library(ggplot2)
 library(dplyr)
 library(patchwork)
 library(purrr)
+library(pheatmap)
 
 kf = readRDS("kf_RIMD.rds") 
 
@@ -91,3 +92,53 @@ feature <- c("tnfa", "mrc1b", "cd79a", "lyve1b", "nppb", "tbx18", "lck",
             "meis2a", "gfi1aa", "elnb", "atp1a3a")
 final_plot <- StackedVlnPlot(obj = kf, features = feature)
 ggsave("stacked_vlnplot.pdf", plot = final_plot, width = 10, height = 20)
+
+# --- Heatmap ---
+marker.list <- list(
+  M = c("mpeg1.1", "mrc1b", "marco"),
+  B = c("cd79b", "cd74b", "pax5"),
+  EC = c("dll4", "lyve1a", "stab1"),
+  VCM = c("tnnt2a", "myh6", "actc1a"),
+  Epi = c("wt1a", "tcf21", "aldh1a2"),
+  T = c("lat", "bcl11bb", "tbx21"),
+  EPDC = c("fbn1", "fbn2b", "wnt5b"),
+  Gran = c("cyp4f3", "hyal3", "gata2a"),
+  SMC = c("acta2", "tagln", "cnn1b"),
+  Neu = c("grid2", "cadm1a", "nrxn2b")
+  )
+
+genes.use <- unique(unlist(marker.list))
+avg.exp <- AverageExpression(kf, features = genes.use, assays = "RNA", slot = "data")$RNA
+gene.order <- unlist(lapply(marker.list, function(genes) {
+    genes[order(avg.exp[genes, "M"], decreasing = TRUE)]
+  })
+)
+avg.exp.scaled <- t(scale(t(avg.exp)))
+avg.exp.scaled[is.na(avg.exp.scaled)] <- 0
+avg.exp.scaled <- avg.exp.scaled[gene.order, ]
+
+png(
+  filename = "avg_exp_heatmap.png",
+  width = 2000,
+  height = 1600,
+  res = 300
+)
+
+pheatmap(
+  avg.exp.scaled,
+  cluster_rows = FALSE,
+  cluster_cols = FALSE,
+  border_color = NA,
+  fontsize_row = 16,
+  fontsize_col = 16,
+  color = colorRampPalette(c("white", "#f768a1", "#7a0177"))(100)
+)
+
+dev.off()
+
+                          
+                          
+                          
+
+
+                          
