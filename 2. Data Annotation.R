@@ -118,21 +118,17 @@ avg.exp.scaled <- t(scale(t(avg.exp)))
 avg.exp.scaled[is.na(avg.exp.scaled)] <- 0
 avg.exp.scaled <- avg.exp.scaled[gene.order, ]
 
-png(
-  filename = "avg_exp_heatmap.png",
-  width = 2000,
-  height = 1600,
-  res = 300
-)
-
-pheatmap(
+p <- pheatmap(
   avg.exp.scaled,
   cluster_rows = FALSE,
   cluster_cols = FALSE,
   border_color = NA,
-  fontsize_row = 16,
+  fontsize_row = 14,
   fontsize_col = 16,
   color = colorRampPalette(c("white", "#f768a1", "#7a0177"))(100)
 )
 
+png("avg_exp_heatmap.png", width = 2000, height = 1600, res = 300)
+grid::grid.newpage()
+grid::grid.draw(p$gtable)
 dev.off()
