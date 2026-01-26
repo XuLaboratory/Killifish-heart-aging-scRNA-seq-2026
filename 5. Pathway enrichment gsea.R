@@ -5,6 +5,7 @@
 #          to identify pathway-level changes
 # 
 # Input: kf_simplified.rds
+#
 # Output: 
 #   - GSEA_Results.xlsx: Complete GSEA results (GO terms, NES, p-values)
 #   - GSEA_RidgePlots.pdf: Ridge plots for all groups
@@ -332,4 +333,5 @@ if (length(ridge_gene_summary) > 0) {
              paste0(out_dir, "RidgePlot_Gene_Summary.xlsx"))
   message("✓ Ridge plot gene summaries exported")
 }
+
 
