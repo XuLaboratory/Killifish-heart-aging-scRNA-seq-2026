@@ -1,7 +1,7 @@
 # ==============================================================================
 # Trajectory analysis - Killifish Heart Aging Study
 # 
-# Purpose: To identify cellular transition 
+# Purpose: To identify cellular transition within VCM (ventricular cardiomyocyte) clusters 
 #          
 # Input: kf_simplified.rds
 #
@@ -17,6 +17,8 @@ library(monocle3)
 library(SeuratWrappers)
 library(igraph)
 library(ggplot2)
+
+kf = readRDS("kf_simplified.rds") 
 
 conditions <- c("W8", "W16")
 
