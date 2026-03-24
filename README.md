@@ -74,7 +74,26 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 ---
 
-### `5. Pathway enrichment gsea.R`
+### `5. Trajectory analysis.R`
+
+- **Purpose**: To perform Gene Set Enrichment Analysis (GSEA) using human orthologs to identify pathway-level changes.
+
+- **Key Functions**:
+  - Convert killifish gene names to human orthologs
+  - Map gene symbols to Entrez IDs for pathway analysis
+  - Run gseGO (Gene Ontology Biological Process) for major cell type groups
+  - Generate ridge plots showing enrichment score distributions
+  - Extract core enrichment genes driving pathway significance
+
+- **Outputs**:
+  - `GSEA_Results.xlsx`: Complete GSEA results (GO terms, NES, p-values)
+  - `GSEA_RidgePlots.pdf`: Ridge plots for all groups
+  - `GO_Gene_Lists.xlsx`: Top 10 core enrichment genes per pathway
+  - `RidgePlot_Gene_Summary.xlsx`: Top 5 genes per pathway (for ridge plot interpretation)
+ 
+---
+
+### `6. Pathway enrichment gsea.R`
 
 - **Purpose**: To perform Gene Set Enrichment Analysis (GSEA) using human orthologs to identify pathway-level changes.
 
@@ -93,7 +112,7 @@ The analysis pipeline consists of 6 steps, covering data integration, annotation
 
 ---
 
-### `6. Cell-cell communication.R`
+### `7. Cell-cell communication.R`
 
 - **Purpose**: To investigate intercellular communications between cell clusters
   
