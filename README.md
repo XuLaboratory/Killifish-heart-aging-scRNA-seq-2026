@@ -5,7 +5,7 @@ scRNA-seq profiles of hearts from young and old GRZ strain ATK
 
 This repository contains R scripts for analyzing single-cell RNA-seq data from African Turquoise Killifish (*Nothobranchius furzeri*) hearts, comparing young adult (Week 8, W8) versus aging (Week 16, W16) timepoints.
 
-The analysis pipeline consists of 6 steps, covering data integration, annotation, cell proportion analysis, differential expression, pathway enrichment, and cell-cell communication.
+The analysis pipeline consists of 7 steps, covering data integration, annotation, cell proportion analysis, differential expression, trajectory analysis, pathway enrichment, and cell-cell communication.
 
 ---
 
