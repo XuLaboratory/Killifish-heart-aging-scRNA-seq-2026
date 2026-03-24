@@ -76,7 +76,7 @@ The analysis pipeline consists of 7 steps, covering data integration, annotation
 
 ### `5. Trajectory analysis.R`
 
-- **Purpose**: To perform Gene Set Enrichment Analysis (GSEA) using human orthologs to identify pathway-level changes.
+- **Purpose**: To identify cellular transition within VCM (ventricular cardiomyocyte) cluster
 
 - **Key Functions**:
   - Convert killifish gene names to human orthologs
@@ -88,8 +88,8 @@ The analysis pipeline consists of 7 steps, covering data integration, annotation
 - **Outputs**:
   - `GSEA_Results.xlsx`: Complete GSEA results (GO terms, NES, p-values)
   - `GSEA_RidgePlots.pdf`: Ridge plots for all groups
-  - `GO_Gene_Lists.xlsx`: Top 10 core enrichment genes per pathway
-  - `RidgePlot_Gene_Summary.xlsx`: Top 5 genes per pathway (for ridge plot interpretation)
+  - 
+  - `
  
 ---
 
