@@ -80,7 +80,7 @@ The analysis pipeline consists of 7 steps, covering data integration, annotation
 
 - **Key Functions**:
   - Perform the monocle3 package to identify cellular transition within VCM clusters 
-  - 
+  - Generate igraph plots to visualize cellular transition  
 
 - **Outputs**:
   - `plot_list$W8`: Trajectory plot for W8 hearts
