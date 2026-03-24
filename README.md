@@ -79,17 +79,12 @@ The analysis pipeline consists of 7 steps, covering data integration, annotation
 - **Purpose**: To identify cellular transition within VCM (ventricular cardiomyocyte) cluster
 
 - **Key Functions**:
-  - Convert killifish gene names to human orthologs
-  - Map gene symbols to Entrez IDs for pathway analysis
-  - Run gseGO (Gene Ontology Biological Process) for major cell type groups
-  - Generate ridge plots showing enrichment score distributions
-  - Extract core enrichment genes driving pathway significance
+  - Perform the monocle3 package to identify cellular transition within VCM clusters 
+  - 
 
 - **Outputs**:
-  - `GSEA_Results.xlsx`: Complete GSEA results (GO terms, NES, p-values)
-  - `GSEA_RidgePlots.pdf`: Ridge plots for all groups
-  - 
-  - `
+  - `plot_list$W8`: Trajectory plot for W8 hearts
+  - `plot_list$W16`: Trajectory plot for W16 hearts
  
 ---
 
