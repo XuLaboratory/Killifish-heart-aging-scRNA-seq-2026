@@ -6,8 +6,8 @@
 # Input: kf_simplified.rds
 #
 # Output: 
-#   - vcm_w8
-#   - vcm_w16
+#   - plot_list$W8
+#   - plot_list$W16
 #   
 # Author: Baul Yoon
 # ==============================================================================
@@ -38,18 +38,15 @@ plot_list <- list()
 
 for (cond in conditions) {
   
-  # Subset VCM + condition
   vcm <- subset(kf, idents = c("VCM1", "VCM2", "VCM3"))
   vcm <- subset(vcm, subset = condition == cond)
   
-  # Convert to CDS
   cds_cm <- as.cell_data_set(vcm)
   reducedDims(cds_cm)$UMAP <- Embeddings(vcm, "umap")
   
   colData(cds_cm)$cluster <- Idents(vcm)
   colData(cds_cm)$condition <- vcm$condition
   
-  # Monocle steps
   cds_cm <- cluster_cells(cds_cm, reduction_method = "UMAP")
   cds_cm <- learn_graph(cds_cm,
                         learn_graph_control = list(
@@ -58,12 +55,10 @@ for (cond in conditions) {
                           prune_graph = TRUE
                         ))
   
-  # Root selection (VCM3)
   root_pr_node <- get_earliest_principal_node(cds_cm, "VCM3")
   
   cds_cm <- order_cells(cds_cm, root_pr_nodes = root_pr_node)
   
-  # Plot
   p <- plot_cells(cds_cm, color_cells_by = "pseudotime",
                   label_roots = TRUE, label_leaves = TRUE,
                   label_branch_points = TRUE, graph_label_size = 5) +
@@ -73,11 +68,9 @@ for (cond in conditions) {
           plot.title = element_text(size = 30, face = "bold", hjust = 0.5)) &
     coord_cartesian(xlim = c(-17.5, -8), ylim = c(-15, -8))
   
-  # Store results
   cds_list[[cond]] <- cds_cm
   plot_list[[cond]] <- p
 }
 
-# Example: show plots
 plot_list$W8
 plot_list$W16
