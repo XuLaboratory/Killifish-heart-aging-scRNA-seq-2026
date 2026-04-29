@@ -86,41 +86,6 @@ The analysis pipeline consists of 7 steps, covering data integration, annotation
   - `plot_list$W8`: Trajectory plot for W8 hearts
   - `plot_list$W16`: Trajectory plot for W16 hearts
  
----
-
-### `6. Pathway enrichment gsea.R`
-
-- **Purpose**: To perform Gene Set Enrichment Analysis (GSEA) using human orthologs to identify pathway-level changes.
-
-- **Key Functions**:
-  - Convert killifish gene names to human orthologs
-  - Map gene symbols to Entrez IDs for pathway analysis
-  - Run gseGO (Gene Ontology Biological Process) for major cell type groups
-  - Generate ridge plots showing enrichment score distributions
-  - Extract core enrichment genes driving pathway significance
-
-- **Outputs**:
-  - `GSEA_Results.xlsx`: Complete GSEA results (GO terms, NES, p-values)
-  - `GSEA_RidgePlots.pdf`: Ridge plots for all groups
-  - `GO_Gene_Lists.xlsx`: Top 10 core enrichment genes per pathway
-  - `RidgePlot_Gene_Summary.xlsx`: Top 5 genes per pathway (for ridge plot interpretation)
-
----
-
-### `7. Cell-cell communication.R`
-
-- **Purpose**: To investigate intercellular communications between cell clusters
-  
-- **Key Functions**:
-  - Import gene expression matrices and cell-type annotation information 
-  - Convert killifish gene names to mouse orthologs
-  - Create CellChat objects for both week 8 and week 16 and compute cell-cell communication probabilities between cell types
-  - Generate a circle plot visualizing intercellular communications and a stacked bar chart showing the relative information flow of signaling pathways  
-  - Generate a heatmap visualizing cell type-specific outgoing and incoming signaling patterns
-    
-- **Outputs**:
-  - cellchat_w8: Week 8 CellChat object
-  - cellchat_w16: Week 16 CellChat object
 
 ---
 
@@ -136,6 +101,6 @@ The analysis pipeline consists of 7 steps, covering data integration, annotation
 
 ## Contributors
 
-- Scripts 1, 2, 5, 7: Baul Yoon
-- Scripts 3, 4, 6: Edward (Yifeng) Xu
+- Scripts 1, 2, 5: Baul Yoon
+- Scripts 3, 4: Edward (Yifeng) Xu
 
